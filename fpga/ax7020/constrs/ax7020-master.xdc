@@ -7,7 +7,7 @@ create_clock -add -name sys_clk_pin -period 20.00 [get_ports {CLK50MHZ}];
 
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets dut_io_pads_jtag_TCK_i_ival]
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets IOBUF_jtag_TCK/O]
-
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets IOBUF_jtag_TCK/O]
 
 #####            rst define           #####
 set_property PACKAGE_PIN N15  [get_ports fpga_rstn  ]
@@ -61,16 +61,20 @@ set_property PACKAGE_PIN Y17  [get_ports {gpio[7]}]
 set_property PACKAGE_PIN Y16  [get_ports {gpio[6]}]
 set_property PACKAGE_PIN W15  [get_ports {gpio[5]}]
 set_property PACKAGE_PIN V15  [get_ports {gpio[4]}]
-set_property PACKAGE_PIN Y14  [get_ports {gpio[3]}]
-set_property PACKAGE_PIN W14  [get_ports {gpio[2]}]
-set_property PACKAGE_PIN P18  [get_ports {gpio[1]}]
-set_property PACKAGE_PIN N17  [get_ports {gpio[0]}]
+# KEY2
+set_property PACKAGE_PIN N16  [get_ports {gpio[3]}]
+# KEY3
+set_property PACKAGE_PIN T17  [get_ports {gpio[2]}]
+# LED1
+set_property PACKAGE_PIN M14  [get_ports {gpio[1]}]
+# LED2
+set_property PACKAGE_PIN M15  [get_ports {gpio[0]}]
 
 
 
 #####            clock & rst define           #####
-set_property IOSTANDARD LVCMOS15 [get_ports fpga_rst  ]
-set_property IOSTANDARD LVCMOS33 [get_ports mcu_rst   ]
+set_property IOSTANDARD LVCMOS33 [get_ports fpga_rstn  ]
+set_property IOSTANDARD LVCMOS33 [get_ports mcu_rstn   ]
 
 
 #####                spi define               #####
@@ -129,6 +133,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {gpio[0]}]
 
 
 #####         SPI Configurate Setting        #######
-set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design] 
-set_property CONFIG_MODE SPIx4 [current_design] 
-set_property BITSTREAM.CONFIG.CONFIGRATE 50 [current_design]
+# set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design] 
+# set_property CONFIG_MODE SPIx4 [current_design] 
+# set_property BITSTREAM.CONFIG.CONFIGRATE 50 [current_design]

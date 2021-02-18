@@ -286,8 +286,17 @@ module system
     .resetn(ck_rst),
     .clk_in1(CLK50MHZ),
     
+    .clk_out1(clk_8388), // 8.388 MHz = 32.768 kHz * 256
     .clk_out2(clk_16M), // 16 MHz, this clock we set to 16MHz 
     .locked(mmcm_locked)
+  );
+
+  wire slowclk;
+  clkdivider slowclkgen
+  (
+    .clk(clk_8388),// We use this clock divide to 32.768KHz
+    .reset(~mmcm_locked),
+    .clk_out(slowclk)
   );
 
   assign ck_rst = fpga_rstn & mcu_rstn;
@@ -980,7 +989,7 @@ module system
     .hfextclk(clk_16M),
     .hfxoscen(),
 
-    .lfextclk(CLK32768KHZ), 
+    .lfextclk(slowclk),
     .lfxoscen(),
 
        // Note: this is the real SoC top AON domain slow clock
